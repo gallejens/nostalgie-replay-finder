@@ -12,7 +12,7 @@ type APIResponse struct {
 	Data []Track `json:"data"`
 }
 
-func apiGetTracks() ([]Track, error) {
+func getTracksFromNostalgieApi() ([]Track, error) {
 	resp, err := http.Get(API_ENDPOINT)
 	if err != nil {
 		return nil, err
@@ -25,6 +25,7 @@ func apiGetTracks() ([]Track, error) {
 	}
 
 	rateLimitRemaining, err := strconv.Atoi(resp.Header.Get("x-ratelimit-remaining"))
+	// fmt.Println("Rate limit remaining:", rateLimitRemaining)
 	if err != nil || rateLimitRemaining < 200 {
 		fmt.Println("Rate limit has gone below 100, watch out")
 		return nil, err

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nostalgie Replay Finder</title>
+  </head>
+  <body>
+    <h1>Nostalgie Replay Finder</h1>
+    <div id="tracks"></div>
+    <script>
+      const eventSource = new EventSource(
+        `${window.location.origin}/tracks?stream=messages`
+      );
+      eventSource.onmessage = function (event) {
+        const dataElement = document.getElementById('tracks');
+        dataElement.innerHTML += event.data + '<br>';
+      };
+    </script>
+  </body>
+</html>
