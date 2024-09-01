@@ -1,0 +1,77 @@
+.container {
+  width: calc(100vw - 2rem);
+  height: calc(100vh - 2rem);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 1rem;
+
+  overflow: hidden;
+}
+
+.tracklist {
+  height: 100%;
+  max-width: 30rem;
+  background-color: #2c2c2c;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+  border-radius: 0.5rem;
+
+  overflow: auto;
+}
+
+.track {
+  width: auto;
+  background-color: #333;
+
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.songname {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.playedat {
+  margin-top: 0.2rem;
+  padding-top: 0.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.116);
+  font-size: 0.8rem;
+}
+
+.played {
+  border: 3px solid #1db954;
+}
+
+.already-played-text {
+  color: #1db954;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.116);
+
+  margin-top: 0.2rem;
+  padding-top: 0.4rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .tracklist {
+    max-width: 100% !important;
+  }
+}
+

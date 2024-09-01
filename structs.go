@@ -1,10 +1,12 @@
 package main
 
 type Track struct {
-	ID       int    `json:"id"`
-	RadioID  int    `json:"radio_id"`
-	TrackID  string `json:"track_id"`
-	Title    string `json:"title"`
-	Artist   string `json:"artist"`
-	PlayedAt string `json:"played_at"`
+	Title         string `json:"title"`
+	Artist        string `json:"artist"`
+	PlayedAt      string `json:"playedAt"`
+	AlreadyPlayed bool   `json:"alreadyPlayed"`
+}
+
+type WebSocketKeepAlive struct {
+	KeepAlive bool `json:"keepAlive"`
 }

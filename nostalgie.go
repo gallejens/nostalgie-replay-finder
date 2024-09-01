@@ -9,33 +9,39 @@ import (
 )
 
 type APIResponse struct {
-	Data []Track `json:"data"`
+	Data []APIResponseDataEntry `json:"data"`
 }
 
-func getTracksFromNostalgieApi() ([]Track, error) {
+type APIResponseDataEntry struct {
+	Title    string `json:"title"`
+	Artist   string `json:"artist"`
+	PlayedAt string `json:"played_at"`
+}
+
+func getFromNostalgieAPI() (APIResponse, error) {
 	resp, err := http.Get(API_ENDPOINT)
 	if err != nil {
-		return nil, err
+		return APIResponse{}, err
 	}
 
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return nil, err
+		return APIResponse{}, err
 	}
 
 	rateLimitRemaining, err := strconv.Atoi(resp.Header.Get("x-ratelimit-remaining"))
 	// fmt.Println("Rate limit remaining:", rateLimitRemaining)
 	if err != nil || rateLimitRemaining < 200 {
 		fmt.Println("Rate limit has gone below 100, watch out")
-		return nil, err
+		return APIResponse{}, err
 	}
 
-	trackResponse := APIResponse{}
-	err = json.Unmarshal(body, &trackResponse)
+	response := APIResponse{}
+	err = json.Unmarshal(body, &response)
 	if err != nil {
-		return nil, err
+		return APIResponse{}, err
 	}
 
-	return trackResponse.Data, nil
+	return response, nil
 }

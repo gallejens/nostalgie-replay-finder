@@ -1,0 +1,18 @@
+services:
+  backend:
+    container_name: nostalgie_replay_finder_backend
+    build: .
+    networks:
+      - tunnel-transport
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflare_tunnel
+    restart: unless-stopped
+    command: tunnel run
+    env_file: .env
+    environment:
+      - TUNNEL_TOKEN=$TUNNEL_TOKEN
+    networks:
+      - tunnel-transport
+networks:
+  tunnel-transport:
